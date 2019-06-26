@@ -29,9 +29,9 @@
         <Space
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="0.1" />
 
-        <com.suke.widget.LSButton
+        <com.huangstudio.liteui.LSButton
             android:id="@+id/switch_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -39,7 +39,7 @@
         <Space
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="0.1" />
     </LinearLayout>
 
 </LinearLayout>

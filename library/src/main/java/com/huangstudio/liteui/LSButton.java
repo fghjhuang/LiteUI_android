@@ -25,6 +25,7 @@ import java.lang.ref.WeakReference;
 
 /**
  * SwitchButton.
+ * 2019-06-26
  * 基于https://github.com/zcweng/SwitchButton 修改的button
  */
 public class LSButton extends View implements Checkable {
