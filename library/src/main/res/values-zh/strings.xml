@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- <string name="app_name">SweetAlertDialog</string>-->
+    <string name="dialog_default_title">这里有一个消息!</string>
+    <string name="dialog_ok">好的</string>
+    <string name="dialog_cancel">取消</string>
+    <string name="LOADING">读取中...</string>
+</resources>

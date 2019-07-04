@@ -1,2 +1,3 @@
-include ':app', ':sw'
+include ':app', ':sw', ':dlib'
 project(':sw').projectDir = new File('library')
+project(':dlib').projectDir = new File('dlibrary')
