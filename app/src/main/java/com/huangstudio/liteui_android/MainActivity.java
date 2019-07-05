@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.button5://自定义dialog
                 break;
+                case xxxxxx
         }
     }
 
