@@ -25,6 +25,7 @@ https://github.com/F0RIS/sweet-alert-dialog 修改的dialog，只是简单修复
 基于https://github.com/FelixLee0527/ColorArcProgressBar 导入的，并没有修改什么东西，一定要说就是在外面加了一个cardview让ui更好看
 基于的这个项目也是基于别人的项目https://github.com/Shinelw/ColorArcProgressBar 做出来的
 
-特点：做表盘类型的进度条的时候需要用到，这里贴上原项目的ui图
+特点：做表盘类型的进度条的时候需要用到，这里贴上原项目的ui图和我修改之后的图
 
 ![image]( https://github.com/fghjhuang/LiteUI_android/blob/master/img/lcircleprogress.gif)
+![image]( https://github.com/fghjhuang/LiteUI_android/blob/master/img/lcircleprogress2.gif)
