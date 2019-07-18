@@ -1,4 +1,4 @@
-package com.huangstudio.liteui.dialog;
+package com.huangstudio.liteui;
 
 
 import android.app.Dialog;
@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -20,11 +19,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.huangstudio.liteui.R;
+import com.huangstudio.liteui.ldialog.Constants;
+import com.huangstudio.liteui.ldialog.OptAnimationLoader;
+import com.huangstudio.liteui.ldialog.ProgressHelper;
+import com.huangstudio.liteui.ldialog.ProgressWheel;
+import com.huangstudio.liteui.ldialog.SuccessTickView;
 
 import java.util.List;
 
-public class SweetAlertDialog extends Dialog implements View.OnClickListener {
+public class LiteAlertDialog extends Dialog implements View.OnClickListener {
     private View mDialogView;
     private AnimationSet mModalInAnim;
     private AnimationSet mModalOutAnim;
@@ -80,21 +83,21 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
     public final static int BUTTON_CANCEL = DialogInterface.BUTTON_NEGATIVE;
 
     public interface OnSweetClickListener {
-        void onClick(SweetAlertDialog sweetAlertDialog);
+        void onClick(LiteAlertDialog liteAlertDialog);
     }
 
-    public SweetAlertDialog(Context context) {
+    public LiteAlertDialog(Context context) {
         this(context, NORMAL_TYPE);
     }
 
-    public SweetAlertDialog(Context context, int alertType) {
+    public LiteAlertDialog(Context context, int alertType) {
         super(context, DARK_STYLE ? R.style.alert_dialog_dark : R.style.alert_dialog_light);
         setCancelable(true);
         setCanceledOnTouchOutside(true);
         mProgressHelper = new ProgressHelper(context);
         mAlertType = alertType;
-        mErrorInAnim = OptAnimationLoader.loadAnimation(getContext(), R.anim.error_frame_in);
-        mErrorXInAnim = (AnimationSet) OptAnimationLoader.loadAnimation(getContext(), R.anim.error_x_in);
+        mErrorInAnim = OptAnimationLoader.loadAnimation(getContext(), R.anim.ldialog_error_frame_in);
+        mErrorXInAnim = (AnimationSet) OptAnimationLoader.loadAnimation(getContext(), R.anim.ldialog_error_x_in);
         // 2.3.x system don't support alpha-animation on layer-list drawable
         // remove it from animation set
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.GINGERBREAD_MR1) {
@@ -109,10 +112,10 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
                 childAnims.remove(idx);
             }
         }
-        mSuccessBowAnim = OptAnimationLoader.loadAnimation(getContext(), R.anim.success_bow_roate);
-        mSuccessLayoutAnimSet = (AnimationSet) OptAnimationLoader.loadAnimation(getContext(), R.anim.success_mask_layout);
-        mModalInAnim = (AnimationSet) OptAnimationLoader.loadAnimation(getContext(), R.anim.modal_in);
-        mModalOutAnim = (AnimationSet) OptAnimationLoader.loadAnimation(getContext(), R.anim.modal_out);
+        mSuccessBowAnim = OptAnimationLoader.loadAnimation(getContext(), R.anim.ldialog_success_bow_roate);
+        mSuccessLayoutAnimSet = (AnimationSet) OptAnimationLoader.loadAnimation(getContext(), R.anim.ldialog_success_mask_layout);
+        mModalInAnim = (AnimationSet) OptAnimationLoader.loadAnimation(getContext(), R.anim.ldialog_modal_in);
+        mModalOutAnim = (AnimationSet) OptAnimationLoader.loadAnimation(getContext(), R.anim.ldialog_modal_out);
         mModalOutAnim.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -126,9 +129,9 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
                     @Override
                     public void run() {
                         if (mCloseFromCancel) {
-                            SweetAlertDialog.super.cancel();
+                            LiteAlertDialog.super.cancel();
                         } else {
-                            SweetAlertDialog.super.dismiss();
+                            LiteAlertDialog.super.dismiss();
                         }
                     }
                 });
@@ -153,7 +156,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.alert_dialog);
+        setContentView(R.layout.alert_ldialog);
 
         mDialogView = getWindow().getDecorView().findViewById(android.R.id.content);
         mTitleTextView = (TextView) findViewById(R.id.title_text);
@@ -198,7 +201,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         mProgressFrame.setVisibility(View.GONE);
         mConfirmButton.setVisibility(View.VISIBLE);
 
-        mConfirmButton.setBackgroundResource(R.drawable.green_button_background);
+        mConfirmButton.setBackgroundResource(R.drawable.ldialog_green_button_background);
         mErrorFrame.clearAnimation();
         mErrorX.clearAnimation();
         mSuccessTick.clearAnimation();
@@ -235,7 +238,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
                     mSuccessRightMask.startAnimation(mSuccessLayoutAnimSet.getAnimations().get(1));
                     break;
                 case WARNING_TYPE:
-//                    mConfirmButton.setBackgroundResource(R.drawable.red_button_background);
+//                    mConfirmButton.setBackgroundResource(R.drawable.ldialog_red_button_background);
                     mWarningFrame.setVisibility(View.VISIBLE);
                     break;
                 case CUSTOM_IMAGE_TYPE:
@@ -266,7 +269,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         return mTitleText;
     }
 
-    public SweetAlertDialog setTitleText(String text) {
+    public LiteAlertDialog setTitleText(String text) {
         mTitleText = text;
         if (mTitleTextView != null && mTitleText != null) {
             if (text.isEmpty()) {
@@ -279,7 +282,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         return this;
     }
 
-    public SweetAlertDialog setCustomImage(Drawable drawable) {
+    public LiteAlertDialog setCustomImage(Drawable drawable) {
         mCustomImgDrawable = drawable;
         if (mCustomImage != null && mCustomImgDrawable != null) {
             mCustomImage.setVisibility(View.VISIBLE);
@@ -288,7 +291,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         return this;
     }
 
-    public SweetAlertDialog setCustomImage(int resourceId) {
+    public LiteAlertDialog setCustomImage(int resourceId) {
         return setCustomImage(getContext().getResources().getDrawable(resourceId));
     }
 
@@ -296,7 +299,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         return mContentText;
     }
 
-    public SweetAlertDialog setContentText(String text) {
+    public LiteAlertDialog setContentText(String text) {
         mContentText = text;
         if (mContentTextView != null && mContentText != null) {
             showContentText(true);
@@ -311,7 +314,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         return mShowCancel;
     }
 
-    public SweetAlertDialog showCancelButton(boolean isShow) {
+    public LiteAlertDialog showCancelButton(boolean isShow) {
         mShowCancel = isShow;
         if (mCancelButton != null) {
             mCancelButton.setVisibility(mShowCancel ? View.VISIBLE : View.GONE);
@@ -323,7 +326,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         return mShowContent;
     }
 
-    public SweetAlertDialog showContentText(boolean isShow) {
+    public LiteAlertDialog showContentText(boolean isShow) {
         mShowContent = isShow;
         if (mContentTextView != null) {
             mContentTextView.setVisibility(mShowContent ? View.VISIBLE : View.GONE);
@@ -335,7 +338,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         return mCancelText;
     }
 
-    public SweetAlertDialog setCancelText(String text) {
+    public LiteAlertDialog setCancelText(String text) {
         mCancelText = text;
         if (mCancelButton != null && mCancelText != null) {
             showCancelButton(true);
@@ -348,7 +351,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         return mConfirmText;
     }
 
-    public SweetAlertDialog setConfirmText(String text) {
+    public LiteAlertDialog setConfirmText(String text) {
         mConfirmText = text;
         if (mConfirmButton != null && mConfirmText != null) {
             mConfirmButton.setText(mConfirmText);
@@ -356,17 +359,17 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         return this;
     }
 
-    public SweetAlertDialog setCancelClickListener(OnSweetClickListener listener) {
+    public LiteAlertDialog setCancelClickListener(OnSweetClickListener listener) {
         mCancelClickListener = listener;
         return this;
     }
 
-    public SweetAlertDialog setConfirmClickListener(OnSweetClickListener listener) {
+    public LiteAlertDialog setConfirmClickListener(OnSweetClickListener listener) {
         mConfirmClickListener = listener;
         return this;
     }
 
-    public SweetAlertDialog setNeutralText(String text) {
+    public LiteAlertDialog setNeutralText(String text) {
         mNeutralText = text;
         if (mNeutralButton != null && mNeutralText != null && !text.isEmpty()) {
             mNeutralButton.setVisibility(View.VISIBLE);
@@ -375,7 +378,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         return this;
     }
 
-    public SweetAlertDialog setNeutralClickListener(OnSweetClickListener listener) {
+    public LiteAlertDialog setNeutralClickListener(OnSweetClickListener listener) {
         mNeutralClickListener = listener;
         return this;
     }
@@ -402,38 +405,38 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         }
     }
 
-    public SweetAlertDialog setConfirmButton(String text, OnSweetClickListener listener) {
+    public LiteAlertDialog setConfirmButton(String text, OnSweetClickListener listener) {
         this.setConfirmText(text);
         this.setConfirmClickListener(listener);
         return this;
     }
 
-    public SweetAlertDialog setConfirmButton(int resId, OnSweetClickListener listener) {
+    public LiteAlertDialog setConfirmButton(int resId, OnSweetClickListener listener) {
         String text = getContext().getResources().getString(resId);
         setConfirmButton(text, listener);
         return this;
     }
 
 
-    public SweetAlertDialog setCancelButton(String text, OnSweetClickListener listener) {
+    public LiteAlertDialog setCancelButton(String text, OnSweetClickListener listener) {
         this.setCancelText(text);
         this.setCancelClickListener(listener);
         return this;
     }
 
-    public SweetAlertDialog setCancelButton(int resId, OnSweetClickListener listener) {
+    public LiteAlertDialog setCancelButton(int resId, OnSweetClickListener listener) {
         String text = getContext().getResources().getString(resId);
         setCancelButton(text, listener);
         return this;
     }
 
-    public SweetAlertDialog setNeutralButton(String text, OnSweetClickListener listener) {
+    public LiteAlertDialog setNeutralButton(String text, OnSweetClickListener listener) {
         this.setNeutralText(text);
         this.setNeutralClickListener(listener);
         return this;
     }
 
-    public SweetAlertDialog setNeutralButton(int resId, OnSweetClickListener listener) {
+    public LiteAlertDialog setNeutralButton(int resId, OnSweetClickListener listener) {
         String text = getContext().getResources().getString(resId);
         setNeutralButton(text, listener);
         return this;
@@ -449,7 +452,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
      *
      * @param view
      */
-    public SweetAlertDialog setCustomView(View view) {
+    public LiteAlertDialog setCustomView(View view) {
         mCustomView = view;
         if (mCustomView != null && mCustomViewContainer != null) {
             mCustomViewContainer.addView(view);
@@ -484,19 +487,19 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
     public void onClick(View v) {
         if (v.getId() == R.id.cancel_button) {
             if (mCancelClickListener != null) {
-                mCancelClickListener.onClick(SweetAlertDialog.this);
+                mCancelClickListener.onClick(LiteAlertDialog.this);
             } else {
                 dismissWithAnimation();
             }
         } else if (v.getId() == R.id.confirm_button) {
             if (mConfirmClickListener != null) {
-                mConfirmClickListener.onClick(SweetAlertDialog.this);
+                mConfirmClickListener.onClick(LiteAlertDialog.this);
             } else {
                 dismissWithAnimation();
             }
         } else if (v.getId() == R.id.neutral_button) {
             if (mNeutralClickListener != null) {
-                mNeutralClickListener.onClick(SweetAlertDialog.this);
+                mNeutralClickListener.onClick(LiteAlertDialog.this);
             } else {
                 dismissWithAnimation();
             }

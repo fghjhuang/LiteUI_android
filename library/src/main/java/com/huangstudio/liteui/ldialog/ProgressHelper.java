@@ -1,4 +1,4 @@
-package com.huangstudio.liteui.dialog;
+package com.huangstudio.liteui.ldialog;
 
 import android.content.Context;
 
@@ -19,13 +19,13 @@ public class ProgressHelper {
     public ProgressHelper(Context ctx) {
         mToSpin = true;
         mSpinSpeed = 0.75f;
-        mBarWidth = ctx.getResources().getDimensionPixelSize(R.dimen.common_circle_width) + 1;
-        mBarColor = ctx.getResources().getColor(R.color.success_stroke_color);
+        mBarWidth = ctx.getResources().getDimensionPixelSize(R.dimen.alert_dialog_common_circle_width) + 1;
+        mBarColor = ctx.getResources().getColor(R.color.alert_dialog_success_stroke_color);
         mRimWidth = 0;
         mRimColor = 0x00000000;
         mIsInstantProgress = false;
         mProgressVal = -1;
-        mCircleRadius = ctx.getResources().getDimensionPixelOffset(R.dimen.progress_circle_radius);
+        mCircleRadius = ctx.getResources().getDimensionPixelOffset(R.dimen.alert_dialog_progress_circle_radius);
     }
 
     public ProgressWheel getProgressWheel () {

@@ -8,40 +8,18 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button7"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:onClick="test"
-        android:text="普通dialog" />
+        android:text="Lite Dialog" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button6"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="警告dialog" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:text="禁止dialog" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:text="等待dialog" />
-
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:text="自定义dialog" />
+        android:text="圆形可调进度条" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.1" />
 
-        <com.huangstudio.liteui.LSButton
+        <com.huangstudio.liteui.LiteSwitch
             android:id="@+id/switch_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

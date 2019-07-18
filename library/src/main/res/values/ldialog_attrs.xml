@@ -12,9 +12,9 @@
         <attr name="pivotY" format="fraction" />
     </declare-styleable>
 
-    <attr name="sweet_alert_bg_drawable" format="reference" />
-    <attr name="sweet_alert_title_text_color" format="color|reference" />
-    <attr name="sweet_alert_content_text_color" format="color|reference" />
+    <attr name="alert_dialog_bg_drawable" format="reference" />
+    <attr name="alert_dialog_title_text_color" format="color|reference" />
+    <attr name="alert_dialog_content_text_color" format="color|reference" />
 
     <declare-styleable name="ProgressWheel">
         <attr format="boolean" name="progressIndeterminate"/>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="alert_width">290dp</dimen>
-    <dimen name="common_circle_width">3dp</dimen>
-    <dimen name="progress_circle_radius">34dp</dimen>
-
-    <dimen name="custom_image_size">53dp</dimen>
-    <dimen name="buttons_stroke_width">0px</dimen>
+    <!-- l dialog 的定时的尺寸 -->
+    <dimen name="alert_dialog_width">290dp</dimen>
+    <dimen name="alert_dialog_common_circle_width">3dp</dimen>
+    <dimen name="alert_dialog_progress_circle_radius">34dp</dimen>
+    <dimen name="alert_dialog_custom_image_size">53dp</dimen>
+    <dimen name="alert_dialog_buttons_stroke_width">0px</dimen>
 </resources>

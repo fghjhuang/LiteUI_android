@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="LSButton">
+    <declare-styleable name="LiteSwitch">
         <attr name="sb_shadow_radius" format="reference|dimension"/>
         <attr name="sb_shadow_offset" format="reference|dimension"/>
         <attr name="sb_shadow_color" format="reference|color"/>

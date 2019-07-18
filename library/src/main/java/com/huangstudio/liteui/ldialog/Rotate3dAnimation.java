@@ -1,4 +1,4 @@
-package com.huangstudio.liteui.dialog;
+package com.huangstudio.liteui.ldialog;
 
 import android.content.Context;
 import android.content.res.TypedArray;
