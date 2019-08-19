@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LiteButton">
+        <attr name="pressColor" format="color" />
+        <attr name="normalColor" format="color" />
+        <attr name="pressTextColor" format="color" />
+        <attr name="normalTextColor" format="color" />
+        <attr name="corner" format="integer"/>
+    </declare-styleable>
+
+</resources>
